@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.257" />
+        <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/drawable/background_spinner_dropdown_item.xml" value="0.2555" />
+        <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/drawable/button_background.xml" value="0.218" />
+        <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/drawable/eatspression_custom_ic_resize.xml" value="0.232" />
+        <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/drawable/eatspression_ic_resize.xml" value="0.232" />
+        <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/drawable/home_ic_resize.xml" value="0.232" />
+        <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.262" />
+        <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.262" />
+        <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2555" />
+        <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.253" />
+        <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/drawable/info_ic_resize.xml" value="0.2175" />
+        <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/drawable/selected_tap_button.xml" value="0.2175" />
+        <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/drawable/spinner_background.xml" value="0.245" />
+        <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/drawable/spinner_item.xml" value="0.2555" />
+        <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/drawable/tab_background.xml" value="0.2175" />
+        <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/drawable/tab_button_background.xml" value="0.232" />
+        <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/layout/activity_custom.xml" value="0.4421875" />
+        <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/layout/activity_info.xml" value="0.4421875" />
+        <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/layout/activity_main.xml" value="0.4222222222222222" />
+        <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/layout/activity_manual.xml" value="0.18857142857142858" />
+        <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/layout/activity_setting.xml" value="0.36018518518518516" />
+        <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/layout/fragment_dashboard.xml" value="0.4421875" />
+        <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/layout/fragment_home.xml" value="0.4421875" />
+        <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/layout/fragment_notifications.xml" value="0.4421875" />
+        <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/layout/item_spinner.xml" value="0.4421875" />
+        <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/layout/multi_image_item.xml" value="0.4421875" />
+        <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/layout/selected_image_item.xml" value="0.4421875" />
+        <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/layout/spinner_dropdown_item.xml" value="0.4421875" />
+        <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/layout/spinner_item.xml" value="0.4421875" />
+        <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/menu/bottom_nav_menu.xml" value="0.23854166666666668" />
+        <entry key="..\:/Users/yumin/AppData/Local/Android/Sdk/platforms/android-32/data/res/layout/simple_spinner_item.xml" value="0.4421875" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
