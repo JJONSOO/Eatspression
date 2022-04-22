@@ -3,7 +3,6 @@ package com.capstone.eatspression;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -26,10 +25,8 @@ import android.widget.Toast;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-//https://lakue.tistory.com/52  ViewPager에 대한 내용은 여기 참고
 public class CustomActivity extends AppCompatActivity {
-//    RecyclerView recyclerView;
-    ViewPager viewPager;
+    RecyclerView recyclerView;
     ArrayList<Uri> uriList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,30 +44,18 @@ public class CustomActivity extends AppCompatActivity {
             }
         });
 
+
         Button startCustomButton = findViewById(R.id.startCustomButton);
         startCustomButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (uriList.size() > 0) {
-                    Intent intent = new Intent();
-                    ComponentName componentName = new ComponentName(getApplicationContext(),
-                            StartCustomActivity.class);
-
-                    Bundle bundle = new Bundle();
-                    bundle.putParcelableArrayList("imgUris", uriList);
-                    intent.putExtras(bundle);
-
-                    intent.setComponent(componentName);
-                    startActivity(intent);
-                    finish();
-                }
+                if (uriList.size() > 0)             // 이미지 선택 한 경우... -> 슬라이드 쇼 보여주는 것으로 변경 해야함!
+                    Toast.makeText(getApplicationContext(), "가져온 이미지로 시작하자!", Toast.LENGTH_LONG).show();
                 else
                     Toast.makeText(getApplicationContext(), "이미지를 갤러리에서 가져와 주세요!", Toast.LENGTH_LONG).show();
             }
         });
 
-
-        // navigation bar start
         Button homeButton = findViewById(R.id.homeButton);
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,21 +95,10 @@ public class CustomActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        // navigation bar end
-
-
-//        recyclerView = findViewById(R.id.selectedImages);
 
 
 
-        viewPager = findViewById(R.id.viewPager);
-
-        viewPager.setClipToPadding(false);
-
-        viewPager.setPadding(100, 0, 100, 0);
-        viewPager.setPageMargin(50);
-
-
+        recyclerView = findViewById(R.id.selectedImages);
         permissionCheck();
     }
 
@@ -141,10 +115,8 @@ public class CustomActivity extends AppCompatActivity {
                     Uri imageUri = data.getData();
                     uriList.add(imageUri);
                     MultiImageAdapter adapter = new MultiImageAdapter(uriList, getApplicationContext());
-//                    recyclerView.setAdapter(adapter);
-//                    recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
-
-                    viewPager.setAdapter(new ViewPagerAdapter(this, null, uriList, true));
+                    recyclerView.setAdapter(adapter);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
                 }
                 else{                               // 이미지를 여러장 선택한 경우
                     ClipData clipData = data.getClipData();
@@ -164,16 +136,13 @@ public class CustomActivity extends AppCompatActivity {
                         }
 
                         MultiImageAdapter adapter = new MultiImageAdapter(uriList, getApplicationContext());
-//                        recyclerView.setAdapter(adapter);
-//                        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-
-                        viewPager.setAdapter(new ViewPagerAdapter(this, null, uriList, true));
+                        recyclerView.setAdapter(adapter);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
                     }
                 }
                 ImageView defaultImage = findViewById(R.id.defaultImage);
                 defaultImage.setVisibility(View.INVISIBLE);
-//                recyclerView.setVisibility(View.VISIBLE);
-                viewPager.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.VISIBLE);
             }
         }
     }
