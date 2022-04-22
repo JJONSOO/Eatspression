@@ -10,7 +10,6 @@ global G_HEADLESS
 G_HEADLESS = "0"
 
 def multi_parser(site):
-    print("headless chrome")
     chromeOptions = webdriver.ChromeOptions()
     chromeOptions.add_argument("user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36")
     chromeOptions.add_argument("headless")
@@ -30,10 +29,12 @@ def parse(driver, site):
         pic = driver.find_element_by_class_name('_img')
         pic = pic.get_attribute('src')
         pic=pic.replace('type=f180_180&','type=w750&')
+        return
     except:
         print(site)
         while(BeautifulSoup(driver.page_source,"html.parser").text[:3] == "429"):
             driver.get(site)
+            time.sleep(0.1)
     pic = driver.find_element_by_class_name('_img')
     pic = pic.get_attribute('src')
     pic=pic.replace('type=f180_180&','type=w750&')
@@ -53,7 +54,7 @@ if __name__ == '__main__': # ， ，pathos
     driver = webdriver.Chrome(executable_path='chromedriver', chrome_options=chromeOptions)
     driver.get(url=URL)
     links = driver.find_elements_by_class_name('bx_area')
-    links=links[:30]
+    links=links[:15]
     list=[]
     for link in links:
         link=link.get_attribute('href')
@@ -68,4 +69,4 @@ if __name__ == '__main__': # ， ，pathos
     pool.close()
     pool.join()
     driver.close()
-    print("time :", time.time() - start)
+    print("\n Multiprocessing time :", time.time() - start)

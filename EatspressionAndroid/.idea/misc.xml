@@ -20,16 +20,19 @@
         <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/drawable/tab_background.xml" value="0.2175" />
         <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/drawable/tab_button_background.xml" value="0.232" />
         <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/layout/activity_custom.xml" value="0.4421875" />
+        <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/layout/activity_custom_result.xml" value="0.4421875" />
         <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/layout/activity_info.xml" value="0.4421875" />
         <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/layout/activity_main.xml" value="0.4222222222222222" />
         <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/layout/activity_manual.xml" value="0.18857142857142858" />
         <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/layout/activity_setting.xml" value="0.36018518518518516" />
+        <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/layout/activity_start_custom.xml" value="0.4421875" />
         <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/layout/fragment_dashboard.xml" value="0.4421875" />
         <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/layout/fragment_home.xml" value="0.4421875" />
         <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/layout/fragment_notifications.xml" value="0.4421875" />
         <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/layout/item_spinner.xml" value="0.4421875" />
         <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/layout/multi_image_item.xml" value="0.4421875" />
         <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/layout/selected_image_item.xml" value="0.4421875" />
+        <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/layout/slide_item.xml" value="0.4421875" />
         <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/layout/spinner_dropdown_item.xml" value="0.4421875" />
         <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/layout/spinner_item.xml" value="0.4421875" />
         <entry key="..\:/Users/yumin/AndroidStudioProjects/Eatspression/app/src/main/res/menu/bottom_nav_menu.xml" value="0.23854166666666668" />
