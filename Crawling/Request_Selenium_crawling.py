@@ -11,8 +11,28 @@ import time
 from bs4 import BeautifulSoup
 
 global G_HEADLESS
+global cnt
 G_HEADLESS = "0"
+def multi_parser(url):
+    result = []
+
+    while(len(result)==0):
+        URL = url
+        print(url)
+
+        response = requests.get(URL) 
+        response.status_code
+        a=response.text.strip("\u002F")
+
+
+        mask = re.compile('"imgUrl":[\S]+",')
+        rmmask = re.compile('("imgUrl":")|(")|,')
+        # print('hello')
+        for i,res in enumerate(mask.findall(a)):
+            result.append(rmmask.sub('', res).replace('\\u002F', '/'))
     
+    print(result[0])
+
 start=time.time()
 URL="https://s.search.naver.com/p/around/search.naver?tab=restaurant&lat=37.451891&lng=126.6543237&rid=11177540"
 # URL="https://m.place.naver.com/restaurant/36271040/review/visitor"
@@ -36,20 +56,10 @@ for link in links:
     link=link[:37]+link[link.find('=')+1:]+'/review/visitor'
     
     list.append(link)
-for idx in range(len(list)):
-    print(list[idx])
-
-    URL = list[idx]
-    response = requests.get(URL) 
-    response.status_code
-    a=response.text.strip("\u002F")
-
-
-    mask = re.compile('"imgUrl":[\S]+",')
-    rmmask = re.compile('("imgUrl":")|(")|,')
-    result = []
-    for res in mask.findall(a):
-        result.append(rmmask.sub('', res).replace('\\u002F', '/'))
-    print(result[0])
-    print('idx: ',idx)
+    
+    
+pool = newPool(process=4)
+pool.map(multi_parser, list)
+pool.close()
+pool.join()
 print("\ntime :", time.time() - start)
