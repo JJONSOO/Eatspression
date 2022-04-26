@@ -13,26 +13,19 @@ from bs4 import BeautifulSoup
 global G_HEADLESS
 global cnt
 G_HEADLESS = "0"
-global tmp
-tmp=[]
+
 def multi_parser(url):
     result = []
 
     while(len(result)==0):
         URL = url
-        # print(url)
-
         response = requests.get(URL) 
         response.status_code
         a=response.text.strip("\u002F")
-
-
         mask = re.compile('"imgUrl":[\S]+",')
         rmmask = re.compile('("imgUrl":")|(")|,')
-        # print('hello')
         for i,res in enumerate(mask.findall(a)):
             result.append(rmmask.sub('', res).replace('\\u002F', '/'))
-    tmp.append(result[0])
     print(result[0])
 if __name__ == '__main__': # ， ，pathos
     start=time.time()
@@ -49,7 +42,6 @@ if __name__ == '__main__': # ， ，pathos
 
     driver.get(url=URL)
     links = driver.find_elements_by_class_name('bx_area')
-    print(len(links))
     links=links[:30]
     list=[]
     for link in links:
@@ -65,4 +57,3 @@ if __name__ == '__main__': # ， ，pathos
     pool.close()
     pool.join()
     print("\ntime :", time.time() - start)
-    print(tmp)
