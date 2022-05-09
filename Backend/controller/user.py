@@ -6,7 +6,16 @@ import os
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from model import Restaurant
 import json
-# from app import app
+
+def truncate(num,n):
+    temp = str(num)
+    for x in range(len(temp)):
+        if temp[x] == '.':
+            try:
+                return float(temp[:x+n+1])
+            except:
+                return float(temp)      
+    return float(temp)
 
 user_api = Namespace('user_api')
 @user_api.route("/")
@@ -14,17 +23,18 @@ class User_location(Resource):
     def get(self):
         return "get"
     def post(self):
-        # tmp = str(request.data)
-        # tmp = tmp[1:]
-        # print(tmp)
-        # point=json.loads(tmp)
+
         point = request.json
-        print(request)
-        x=point['x']
-        y=point['y']
-        print(x)
-        print(y)
-        tmp=Restaurant.get_food_list(x,y)
-        tmp=dict(zip(range(1, len(tmp) + 1), tmp))
-        print(tmp)
-        return json.dumps(tmp)
+        x=truncate(point['x'],7)
+        y=truncate(point['y'],7)
+        distance=point['dist']
+        num=point['recommendNum']
+
+        food_list=Restaurant.get_food_list(x,y,distance,num)
+
+        data={}
+        data['img_list']=(food_list)
+        tmp=json.dumps(data)
+
+        return tmp
+
