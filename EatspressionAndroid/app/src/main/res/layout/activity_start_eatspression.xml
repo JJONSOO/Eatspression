@@ -4,10 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StartCustomActivity">
-
+    tools:context=".StartEatspressionActivity">
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPager"
+        android:id="@+id/viewPagerAuto"
         android:layout_width="match_parent"
         android:layout_height="650dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -19,7 +18,7 @@
         app:layout_constraintVertical_bias="0.2"></androidx.viewpager.widget.ViewPager>
 
     <Button
-        android:id="@+id/stopButton"
+        android:id="@+id/stopButtonAuto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="60dp"
@@ -40,7 +39,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <com.capstone.eatspression.CameraSurfaceView
-            android:id="@+id/surfaceView"
+            android:id="@+id/surfaceViewAuto"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </FrameLayout>

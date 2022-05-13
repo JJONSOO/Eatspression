@@ -1,19 +1,14 @@
 package com.capstone.eatspression;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.AlertDialog;
 import android.content.ComponentName;
-import android.content.DialogInterface;
+import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
-import android.provider.Settings;
-import android.util.DisplayMetrics;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -21,13 +16,13 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 public class SettingActivity extends AppCompatActivity {
-    String[] distanceStrArr = {"100m", "300m", "500m", "1km", "식당까지의 거리"};
-    String[] recommendNumStrArr = {"10개", "15개", "20개", "25개", "30개", "식당 추천 후보 개수"};
-    int[] distanceArr = {100, 300, 500, 1000};
-    int[] recommendNumArr = {10, 15, 20, 25, 30};
+    String[] distanceStrArr = {"300m", "500m", "1km", "식당까지의 거리"};
+    String[] recommendNumStrArr = {"3개", "5개", "7개", "10개", "15개", "식당 추천 후보 개수"};
+    int[] distanceArr = {300, 500, 1000};
+    int[] recommendNumArr = {3, 5, 7, 10, 15};
     int selectedDistIdx = -1;
     int selectedRecommendNumIdx = -1;
-
+    double latitude, longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +39,31 @@ public class SettingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (selectedDistIdx != distanceArr.length && selectedRecommendNumIdx != recommendNumArr.length) {
-                    Toast.makeText(getApplicationContext(), "시작하자!", Toast.LENGTH_LONG).show();
+                    LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+                    try {
+                        Location location = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                        if (location != null) {
+                            latitude = location.getLatitude();
+                            longitude = location.getLongitude();
+                        }
+                    } catch(SecurityException e) {
+                        e.printStackTrace();
+                    }
+                    Intent intent = new Intent();
+                    ComponentName componentName = new ComponentName(getApplicationContext(),
+                            StartEatspressionActivity.class);
+
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("recommendNum", recommendNumArr[selectedRecommendNumIdx]);
+                    bundle.putInt("dist", distanceArr[selectedDistIdx]);
+                    bundle.putDouble("longitude", longitude);
+                    bundle.putDouble("latitude", latitude);
+                    intent.putExtras(bundle);
+
+                    intent.setComponent(componentName);
+                    startActivity(intent);
+                    finish();
                 } else {
                     Toast.makeText(getApplicationContext(), "거리와 후보 개수를 지정해주세요!", Toast.LENGTH_LONG).show();
                 }

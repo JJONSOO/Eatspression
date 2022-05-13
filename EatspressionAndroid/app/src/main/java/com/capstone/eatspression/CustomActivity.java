@@ -1,29 +1,20 @@
 package com.capstone.eatspression;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.ComponentName;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 
 //https://lakue.tistory.com/52  ViewPager에 대한 내용은 여기 참고

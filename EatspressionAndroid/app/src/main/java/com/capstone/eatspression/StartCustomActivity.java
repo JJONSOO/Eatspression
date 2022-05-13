@@ -8,8 +8,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -19,23 +21,22 @@ import java.util.TimerTask;
 public class StartCustomActivity extends AppCompatActivity {
     ViewPager viewPager;
     int currentPage = 0;
-
+    CameraSurfaceView surfaceView;
+    Timer timer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_custom);
 
-        Button stopButton = findViewById(R.id.stopButton);
-        stopButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "중간에 중단하여 결과가 만들어지지 못했습니다.", Toast.LENGTH_LONG).show();
-                finish();
-            }
-        });
+        surfaceView = findViewById(R.id.surfaceView);
 
         viewPager = findViewById(R.id.viewPager);
-
+        viewPager.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
+            }
+        });
         viewPager.setClipToPadding(false);
 
         viewPager.setPadding(100, 0, 100, 0);
@@ -51,10 +52,13 @@ public class StartCustomActivity extends AppCompatActivity {
                     currentPage = 0;
                 }
                 viewPager.setCurrentItem(currentPage++, true);
+                surfaceView.pageCounter = currentPage;
             }
         };
 
-        Timer timer = new Timer();
+
+
+        timer = new Timer();
         timer.schedule(new TimerTask() {
             int cnt = 0;
             @Override
@@ -67,11 +71,23 @@ public class StartCustomActivity extends AppCompatActivity {
                             CustomResultActivity.class);
                     intent.setComponent(componentName);
                     startActivity(intent);
+                    surfaceView.surfaceDestroyed(surfaceView.getHolder());
                     finish();
                 }
                 cnt++;
             }
-        }, 0, 2000);
+        }, 0, 3020);
+        Button stopButton = findViewById(R.id.stopButton);
+        stopButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                surfaceView.surfaceDestroyed(surfaceView.getHolder());
+                timer.cancel();
 
+                Toast.makeText(getApplicationContext(), "중간에 중단하여 결과가 만들어지지 못했습니다.", Toast.LENGTH_LONG).show();
+
+                finish();
+            }
+        });
     }
 }
