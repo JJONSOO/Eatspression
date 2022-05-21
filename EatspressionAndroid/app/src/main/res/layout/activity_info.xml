@@ -28,6 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Eatspression"
+                android:enabled="false"
                 android:textColor="#000000"
                 android:textSize="33sp"
                 android:textStyle="bold"
