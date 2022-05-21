@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 import org.json.JSONObject;
 
@@ -150,7 +151,7 @@ public class StartEatspressionActivity extends AppCompatActivity {
         viewPager.setClipToPadding(false);
 
         viewPager.setPadding(100, 0, 100, 0);
-        viewPager.setPageMargin(50);
+        viewPager.setPageMargin(20);
 
         viewPager.setAdapter(new ViewPagerAdapter(getApplicationContext(), urlList, null, false));
         final Handler handler = new Handler();
@@ -176,9 +177,8 @@ public class StartEatspressionActivity extends AppCompatActivity {
                     handler.post(Update);
                 else if (cnt == urlList.size()) {
                     // 페이지 종료
-                    Log.i("tag", "close this page~");
                     surfaceView.surfaceDestroyed(surfaceView.getHolder());
-                    Log.i("tag", "close this page~");
+
                     Intent intent = new Intent();
                     ComponentName componentName = new ComponentName(getApplicationContext(),
                             EatspressionResultActivity.class);
@@ -186,13 +186,15 @@ public class StartEatspressionActivity extends AppCompatActivity {
                     bundle.putInt("userId", idList.get(0));
                     intent.putExtras(bundle);
                     intent.setComponent(componentName);
+
+                    Log.i("tag", "startActivity~");
                     startActivity(intent);
 
                     finish();
                 }
                 cnt++;
             }
-        }, 100, 2000);
+        }, 100, 2020);
 
 
         Button button2 = findViewById(R.id.stopButtonAuto);

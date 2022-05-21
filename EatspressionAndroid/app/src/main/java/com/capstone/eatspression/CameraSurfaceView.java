@@ -22,16 +22,27 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
+class SendStructure {
+    public Bitmap img;
+    public int imgCnt;
+    public SendStructure(Bitmap img, int imgCnt) {
+        this.img = img;
+        this.imgCnt = imgCnt;
+    }
+}
+
 public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Callback{
     SurfaceHolder holder;
     Camera camera = null;
     public Bitmap image;
     int h, w, format;
-
+    boolean customFlag = false;
+    ArrayList<SendStructure> sendItemList = new ArrayList<>();
     public ArrayList<Integer> dataList = new ArrayList<>();
+    int sendCnt = 0;
     // image를 보내는 연결된 HttpURLConnection!
     // 보내는 방법은 https://sesang06.tistory.com/19를 참조하자!
-    public HttpURLConnection conn;
+
 
     ArrayList<Thread> futureList = new ArrayList<>();
 
@@ -84,11 +95,7 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
         camera  = Camera.open(findFrontSideCamera());//카메라 객체 참조
         try{
             camera.setPreviewDisplay(holder);
-//            Thread.sleep(2000);
-            Camera.Parameters params = camera.getParameters();
-            w = params.getPreviewSize().width;
-            h = params.getPreviewSize().height;
-            format = params.getPreviewFormat();
+
             camera.setPreviewCallback(new Camera.PreviewCallback() {
                 public void onPreviewFrame(byte[] data, Camera camera2) {
                     synchronized(dataList) {
@@ -105,7 +112,20 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
                             return;
                         startTime = currentTime;
                     }
+                    try {
 
+                        synchronized (camera2) {
+                            if (camera2 != null) {
+                                Camera.Parameters params = camera2.getParameters();
+                                w = params.getPreviewSize().width;
+                                h = params.getPreviewSize().height;
+                                format = params.getPreviewFormat();
+                            }
+                        }
+                    } catch(NullPointerException e) {
+                        e.printStackTrace();
+                        return;
+                    }
                     YuvImage yuv = new YuvImage(data,  format, w, h, null);
                     ByteArrayOutputStream out = new ByteArrayOutputStream();
                     Rect area = new Rect(0, 0, w, h);
@@ -130,23 +150,34 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
                     }
 
                     image = Bitmap.createScaledBitmap(image, w, h, true);
-
+                    synchronized(dataList) {
+                        synchronized(sendItemList) {
+                            sendItemList.add(new SendStructure(image.copy(image.getConfig(), true), dataList.get(0)));
+                        }
+                    }
                     final Thread th = new Thread(new Runnable() {
                         @Override
                         public void run() {
                             try {
-                                String page = "http://54.241.56.66:8080/restraunt/image";
+                                String page;
+                                if (customFlag) {
+                                    page = "http://54.241.56.66:8080/restraunt/custom/image";
+                                }else {
+                                    page = "http://54.241.56.66:8080/restraunt/image";
+                                }
+
                                 // URL 객체 생성
                                 URL url = new URL(page);
                                 // 연결 객체 생성
-                                conn = (HttpURLConnection) url.openConnection();
+                                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
                                 // Post 파라미터
                                 JSONObject jsonObject = new JSONObject();
-                                String send = getStringFromBitmap(image);
-                                jsonObject.put("image", send);
+                                synchronized(sendItemList) {
+                                    jsonObject.put("image", getStringFromBitmap(sendItemList.get(sendCnt).img));
+                                    jsonObject.put("img_num", sendItemList.get(sendCnt++).imgCnt);
+                                }
                                 synchronized (dataList) {
-                                    jsonObject.put("img_num", dataList.get(0).toString());
                                     jsonObject.put("user_id", dataList.get(1).toString());
                                 }
                                 if (conn != null) {
@@ -206,13 +237,15 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
     @Override
     public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
         //소멸
-        synchronized(camera) {
-            if (camera != null) {
-                camera.stopPreview();       //미리보기중지
-                camera.setPreviewCallback(null);
-                camera.release();
+        try {
+            synchronized (camera) {
+                if (camera != null) {
+                    camera.stopPreview();       //미리보기중지
+                    camera.setPreviewCallback(null);
+                    camera.release();
+                }
             }
-        }
+        } catch(NullPointerException e) {}
 
         // 최종적으로 Thread들 join 해서 없애주기
         synchronized(futureList) {

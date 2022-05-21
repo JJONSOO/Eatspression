@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.bumptech.glide.Glide;
 
@@ -26,10 +27,22 @@ import java.util.ArrayList;
 public class EatspressionResultActivity extends AppCompatActivity {
     public ArrayList<String> responseList = new ArrayList<>();
     public HttpURLConnection conn;
+    int userId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_eatspression_result);
+
         Log.i("tag", "get result!!");
-        int userId = getIntent().getExtras().getInt("userId");
+        userId = getIntent().getExtras().getInt("userId");
+
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
         int status = NetworkStatus.getConnectivityStatus(getApplicationContext());
         if(status == NetworkStatus.TYPE_MOBILE || status == NetworkStatus.TYPE_WIFI) {
             final StringBuilder sb = new StringBuilder();
@@ -53,7 +66,7 @@ public class EatspressionResultActivity extends AppCompatActivity {
                             if (conn != null) {
                                 Log.i("tag", "conn 연결");
                                 // 응답 타임아웃 설정
-                                conn.setConnectTimeout(10000);
+                                conn.setConnectTimeout(20000);
 
                                 // POST 요청방식
                                 conn.setRequestMethod("POST");
@@ -61,7 +74,7 @@ public class EatspressionResultActivity extends AppCompatActivity {
                                 conn.setRequestProperty("Accept", "application/json");
                                 conn.setDoOutput(true);
                                 conn.setDoInput(true);
-
+                                Log.i("tag", "get result!!");
                                 // 포스트 파라미터 전달
                                 OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
                                 wr.write(jsonObject.toString());
@@ -85,6 +98,9 @@ public class EatspressionResultActivity extends AppCompatActivity {
                                     responseList.add(jsonResponse.getString("img"));
 //                                    responseList.add(jsonResponse.getString("restaurantName"));
                                     responseList.add(jsonResponse.getString("address"));
+
+                                } else {
+                                    Log.i("tag", "오류가 있는듯...");
                                 }
                             }
                             //
@@ -103,33 +119,34 @@ public class EatspressionResultActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_eatspression_result);
 
         ImageView favoriteImg = findViewById(R.id.favoriteImage);
+        favoriteImg.setVisibility(View.VISIBLE);
         Glide.with(this).load(responseList.get(0)).into(favoriteImg);
 
 
         EditText restaurantName = findViewById(R.id.restaurantName);
-        restaurantName.setText(responseList.get(1));
-
+//        restaurantName.setText(responseList.get(1));
+        restaurantName.setText("샤브담 인하대점");
 
         Button siteButton = findViewById(R.id.siteButton);
         siteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(responseList.get(2)));
+//                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(responseList.get(2)));
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(responseList.get(1)));
                 startActivity(intent);
             }
         });
 
 
-        Button roadButton = findViewById(R.id.roadButton);
-        roadButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
+//        Button roadButton = findViewById(R.id.roadButton);
+//        roadButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(responseList.get(3)));
+////                startActivity(intent);
+//            }
+//        });
     }
 }

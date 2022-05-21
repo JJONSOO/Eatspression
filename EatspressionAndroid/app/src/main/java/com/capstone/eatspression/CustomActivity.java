@@ -55,7 +55,7 @@ public class CustomActivity extends AppCompatActivity {
 
                     intent.setComponent(componentName);
                     startActivity(intent);
-                    finish();
+//                    finish();                         // finish를 안해줘야 result화면에서 uri로 이미지에 접근 가능함..
                 }
                 else
                     Toast.makeText(getApplicationContext(), "이미지를 갤러리에서 가져와 주세요!", Toast.LENGTH_LONG).show();
