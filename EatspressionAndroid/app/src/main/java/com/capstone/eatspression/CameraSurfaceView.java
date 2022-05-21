@@ -26,8 +26,9 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
     SurfaceHolder holder;
     Camera camera = null;
     public Bitmap image;
-    public int pageCounter = 0;
-    public int id;
+    int h, w, format;
+
+    public ArrayList<Integer> dataList = new ArrayList<>();
     // image를 보내는 연결된 HttpURLConnection!
     // 보내는 방법은 https://sesang06.tistory.com/19를 참조하자!
     public HttpURLConnection conn;
@@ -84,23 +85,26 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
         try{
             camera.setPreviewDisplay(holder);
 //            Thread.sleep(2000);
+            Camera.Parameters params = camera.getParameters();
+            w = params.getPreviewSize().width;
+            h = params.getPreviewSize().height;
+            format = params.getPreviewFormat();
             camera.setPreviewCallback(new Camera.PreviewCallback() {
-                public void onPreviewFrame(byte[] data, Camera camera) {
+                public void onPreviewFrame(byte[] data, Camera camera2) {
+                    synchronized(dataList) {
+                        if (dataList.size() != 2)
+                            return;
+                    }
+
                     if (isFirstTime) {
                         isFirstTime = false;
                         startTime = System.currentTimeMillis();
                     } else {
                         long currentTime = System.currentTimeMillis();
-                        if (currentTime - startTime < 200)
+                        if (currentTime - startTime < 300)
                             return;
                         startTime = currentTime;
                     }
-                    Camera.Parameters params = camera.getParameters();
-
-                    // http://egloos.zum.com/pavecho/v/7210478
-                    int w = params.getPreviewSize().width;
-                    int h = params.getPreviewSize().height;
-                    int format = params.getPreviewFormat();
 
                     YuvImage yuv = new YuvImage(data,  format, w, h, null);
                     ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -131,7 +135,7 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
                         @Override
                         public void run() {
                             try {
-                                String page = "http://54.183.227.153:8080/restraunt/image";
+                                String page = "http://54.241.56.66:8080/restraunt/image";
                                 // URL 객체 생성
                                 URL url = new URL(page);
                                 // 연결 객체 생성
@@ -141,9 +145,10 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
                                 JSONObject jsonObject = new JSONObject();
                                 String send = getStringFromBitmap(image);
                                 jsonObject.put("image", send);
-                                jsonObject.put("img_num", pageCounter);
-                                jsonObject.put("id", id);
-
+                                synchronized (dataList) {
+                                    jsonObject.put("img_num", dataList.get(0).toString());
+                                    jsonObject.put("user_id", dataList.get(1).toString());
+                                }
                                 if (conn != null) {
                                     Log.i("tag", "conn 연결");
                                     // 응답 타임아웃 설정
@@ -175,7 +180,9 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
                     });
 
                     th.start();
-                    futureList.add(th);
+                    synchronized(futureList) {
+                        futureList.add(th);
+                    }
                 }
             });
         }catch (Exception e){
@@ -198,24 +205,27 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
 
     @Override
     public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
-        // 최종적으로 Thread들 join 해서 없애주기
-        for (Thread elem : futureList) {
-            try {
-                elem.join();
-            } catch (Exception e) {
-                e.printStackTrace();
+        //소멸
+        synchronized(camera) {
+            if (camera != null) {
+                camera.stopPreview();       //미리보기중지
+                camera.setPreviewCallback(null);
+                camera.release();
             }
         }
 
-        //소멸
-        if (camera != null) {
-            camera.stopPreview();       //미리보기중지
-            camera.setPreviewCallback(null);
-            camera.release();
+        // 최종적으로 Thread들 join 해서 없애주기
+        synchronized(futureList) {
+            for (Thread elem : futureList) {
+                try {
+                    elem.join();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
         camera = null;
         Log.i("tag", "결과 카메라 종료");
     }
-
 }

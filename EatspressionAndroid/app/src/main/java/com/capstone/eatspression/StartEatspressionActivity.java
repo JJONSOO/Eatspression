@@ -35,6 +35,7 @@ public class StartEatspressionActivity extends AppCompatActivity {
     public HttpURLConnection conn;
 
     public ArrayList<String> urlList = new ArrayList<>();
+    public ArrayList<Integer> idList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +52,7 @@ public class StartEatspressionActivity extends AppCompatActivity {
                 public void run() {
                     while (true) {
                         try {
-                            String page = "http://54.183.227.153:8080/restraunt/";
+                            String page = "http://54.241.56.66:8080/restraunt/";
 
                             // URL 객체 생성
                             URL url = new URL(page);
@@ -105,7 +106,7 @@ public class StartEatspressionActivity extends AppCompatActivity {
                                     }
 
                                     try {
-                                        jsonResponse.getInt("id");
+                                        idList.add(jsonResponse.getInt("user_id"));
                                     } catch(Exception e) {
                                         Log.i("tag", "id was not sent...");
                                     }
@@ -129,14 +130,17 @@ public class StartEatspressionActivity extends AppCompatActivity {
             }
         }
 
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_eatspression);
+
 
         surfaceView = findViewById(R.id.surfaceViewAuto);
         viewPager = findViewById(R.id.viewPagerAuto);
 
-
+        synchronized(surfaceView.dataList) {
+            surfaceView.dataList.add(0);
+            surfaceView.dataList.add(idList.get(0));
+        }
         viewPager.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -157,7 +161,9 @@ public class StartEatspressionActivity extends AppCompatActivity {
                     currentPage = 0;
                 }
                 viewPager.setCurrentItem(currentPage++, true);
-                surfaceView.pageCounter = currentPage;
+                synchronized(surfaceView.dataList) {
+                    surfaceView.dataList.set(0, currentPage - 1);
+                }
             }
         };
 
@@ -170,10 +176,15 @@ public class StartEatspressionActivity extends AppCompatActivity {
                     handler.post(Update);
                 else if (cnt == urlList.size()) {
                     // 페이지 종료
+                    Log.i("tag", "close this page~");
                     surfaceView.surfaceDestroyed(surfaceView.getHolder());
+                    Log.i("tag", "close this page~");
                     Intent intent = new Intent();
                     ComponentName componentName = new ComponentName(getApplicationContext(),
-                            CustomResultActivity.class);
+                            EatspressionResultActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("userId", idList.get(0));
+                    intent.putExtras(bundle);
                     intent.setComponent(componentName);
                     startActivity(intent);
 
@@ -181,7 +192,7 @@ public class StartEatspressionActivity extends AppCompatActivity {
                 }
                 cnt++;
             }
-        }, 1000, 2000);
+        }, 100, 2000);
 
 
         Button button2 = findViewById(R.id.stopButtonAuto);

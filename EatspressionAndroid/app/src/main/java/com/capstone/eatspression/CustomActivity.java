@@ -26,6 +26,8 @@ public class CustomActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom);
+
+
         Button selectButton = findViewById(R.id.selectImageButton);
         selectButton.setOnClickListener(new View.OnClickListener() {
             @Override

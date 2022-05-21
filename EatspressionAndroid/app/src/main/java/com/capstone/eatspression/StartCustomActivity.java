@@ -52,7 +52,9 @@ public class StartCustomActivity extends AppCompatActivity {
                     currentPage = 0;
                 }
                 viewPager.setCurrentItem(currentPage++, true);
-                surfaceView.pageCounter = currentPage;
+                synchronized(surfaceView.dataList) {
+                    surfaceView.dataList.set(0, currentPage - 1);
+                }
             }
         };
 
