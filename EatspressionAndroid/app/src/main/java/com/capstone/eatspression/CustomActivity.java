@@ -1,29 +1,20 @@
 package com.capstone.eatspression;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.ComponentName;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 
 //https://lakue.tistory.com/52  ViewPager에 대한 내용은 여기 참고
@@ -35,6 +26,8 @@ public class CustomActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom);
+
+
         Button selectButton = findViewById(R.id.selectImageButton);
         selectButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +55,7 @@ public class CustomActivity extends AppCompatActivity {
 
                     intent.setComponent(componentName);
                     startActivity(intent);
-                    finish();
+//                    finish();                         // finish를 안해줘야 result화면에서 uri로 이미지에 접근 가능함..
                 }
                 else
                     Toast.makeText(getApplicationContext(), "이미지를 갤러리에서 가져와 주세요!", Toast.LENGTH_LONG).show();
