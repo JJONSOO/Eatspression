@@ -5,11 +5,14 @@ from keras.layers import Conv2D, MaxPooling2D, AveragePooling2D, Flatten, Dense,
 import numpy as np
 from deepface import DeepFace
 from deepface.commons import functions, realtime, distance as dst
+import os
+import gdown
 
 cosine_loss = tf.keras.losses.CosineSimilarity()
 
 POSITIVE = ['happy', 'neutral', 'surprise']
 NEGATIVE = ['angry', 'disgust', 'fear', 'sad']
+
 
 def loadModel(url = 'https://github.com/serengil/deepface_models/releases/download/v1.0/facial_expression_model_weights.h5'):
 
@@ -61,21 +64,25 @@ def loadModel(url = 'https://github.com/serengil/deepface_models/releases/downlo
         """
 
     model.load_weights(home+'/.deepface/weights/facial_expression_model_weights.h5')
+    dense = Sequential()
+    dense_layer = model.get_layer(index=-1)
+    dense.add(dense_layer)
     model.pop()
-    return model
+    model.pop()
+    return model, dense
 
-model = loadModel()
+model, dense = loadModel()
 
 def preprocess(path):
     img, _ = functions.preprocess_face(img = path, target_size = (48, 48), grayscale = True, enforce_detection = True, detector_backend = 'opencv', return_region = True)
     return img
 
-def to_emo(img):
-    return DeepFace.analyze(img_path = img, actions = ['emotion'])['emotion']
+def to_emo(vec):
+    # angry disgust fear happy sad surprise neutral
+    return dense(vec)
 
 def to_vec(img):
-    model = loadModel()
-    return tf.squeeze(model(preprocess(img)))
+    return model(preprocess(img))
 
 def get_emo_vec(img_list):
     emo_list = []
@@ -83,16 +90,22 @@ def get_emo_vec(img_list):
     
     init_img = img_list[0][0]
     
-    emo_list.append(to_emo(init_img))
-    vec_list.append(to_vec(init_img))
+    init_emo = []
+    init_vec = []
+    vec = to_vec(init_img)
+    init_emo.append(to_emo(vec))
+    init_vec.append(tf.squeeze(vec))
+    emo_list.append(init_emo)
+    vec_list.append(init_vec)
     
     
     for imgs in img_list:
         emo_tmp = []
         vec_tmp = []
         for img in imgs:
-            emo_tmp.append(to_emo(img))
-            vec_tmp.append(to_vec(img))
+            vec = to_vec(img)
+            emo_tmp.append(to_emo(vec))
+            vec_tmp.append(tf.squeeze(vec))
         emo_list.append(emo_tmp)
         vec_list.append(vec_tmp)
         
@@ -104,11 +117,9 @@ def calc_cosSim(vec1, vec2):
 def calc_emoSim(emo):
     pos = 0
     neg = 0
-    for k, v in emo.items():
-        if k in POSITIVE:
-            pos += v
-        elif k in NEGATIVE:
-            neg += v
+    pos += emo[3]
+    pos += emo[-1]
+    neg += emo[4]
     return pos - neg
 
 def analyze(img_list):
@@ -117,11 +128,14 @@ def analyze(img_list):
     init_emo = emo_list[0][0]
     init_vec = vec_list[0][0]
     
+    del emo_list[0]
+    del vec_list[0]
+    
     emo_idx, cos_idx = -1, -1
     emo_score, cos_score = init_emo, 0
     
     for idx, l in enumerate(zip(emo_list, vec_list)):
-        for emo, vec in l:
+        for emo, vec in zip(l[0], l[1]):
             emo_sim = calc_emoSim(emo)
             cos_sim = calc_cosSim(init_vec, vec)
             if emo_idx == -1 or emo_score <= emo_sim:
@@ -130,3 +144,33 @@ def analyze(img_list):
                     emo_score, cos_score = emo_sim, cos_sim
     
     return idx
+
+# # all average
+# def analyze(img_list):
+#     emo_list, vec_list = get_emo_vec(img_list)
+    
+#     init_emo = emo_list[0][0]
+#     init_vec = vec_list[0][0]
+    
+#     del emo_list[0]
+#     del vec_list[0]
+    
+#     emo_idx, cos_idx = -1, -1
+#     emo_score, cos_score = init_emo, 0
+    
+#     for idx, l in enumerate(zip(emo_list, vec_list)):
+#         emo_sim, cos_sim = 0, 0
+#         cnt = 0
+#         for emo, vec in zip(l[0], l[1]):
+#             emo = calc_emoSim(emo)
+#             if abs(init_emo) - abs(emo) < 40:
+#                 cnt += 1
+#                 emo_sim += calc_emoSim(emo)
+#                 cos_sim += calc_cosSim(init_vec, vec)
+#         emo_sim /= cnt
+#         cos_sim /= cnt
+#         if emo_idx == -1 or emo_score <= emo_sim:
+#             if cos_idx == -1 or cos_score < cos_sim:
+#                 cos_idx, emo_idx = idx, idx
+#                 emo_score, cos_score = emo_sim, cos_sim
+            
