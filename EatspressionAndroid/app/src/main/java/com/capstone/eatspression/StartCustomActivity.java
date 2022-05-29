@@ -125,8 +125,8 @@ public class StartCustomActivity extends AppCompatActivity {
         surfaceView = findViewById(R.id.surfaceView);
         surfaceView.customFlag = true;
         synchronized(surfaceView.dataList) {
-            surfaceView.dataList.add(0);
             surfaceView.dataList.add(idList.get(0));
+            surfaceView.dataList.add(0);
         }
 
 
@@ -139,8 +139,8 @@ public class StartCustomActivity extends AppCompatActivity {
         });
         viewPager.setClipToPadding(false);
 
-        viewPager.setPadding(100, 0, 100, 0);
-        viewPager.setPageMargin(50);
+        viewPager.setPadding(50, 0, 50, 0);
+        viewPager.setPageMargin(20);
 
 
         viewPager.setAdapter(new ViewPagerAdapter(getApplicationContext(), null, uriList, true));

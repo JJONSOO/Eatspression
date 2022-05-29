@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -103,7 +104,9 @@ public class StartEatspressionActivity extends AppCompatActivity {
                                     // 응답 Json 타입
                                     JSONObject jsonResponse = new JSONObject(sb.toString());
                                     for (int i = 1; i <= recommendNum; ++i) {
-                                        urlList.add(jsonResponse.getString(Integer.toString(i)));
+//                                        urlList.add(jsonResponse.getString(Integer.toString(i)));
+                                        JSONArray jArray = jsonResponse.getJSONArray(Integer.toString(i));
+                                        urlList.add((String)jArray.get(0));
                                     }
 
                                     try {
@@ -141,6 +144,7 @@ public class StartEatspressionActivity extends AppCompatActivity {
         synchronized(surfaceView.dataList) {
             surfaceView.dataList.add(0);
             surfaceView.dataList.add(idList.get(0));
+            surfaceView.totalImageNum = urlList.size();
         }
         viewPager.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -150,7 +154,7 @@ public class StartEatspressionActivity extends AppCompatActivity {
         });
         viewPager.setClipToPadding(false);
 
-        viewPager.setPadding(100, 0, 100, 0);
+        viewPager.setPadding(50, 0, 50, 0);
         viewPager.setPageMargin(20);
 
         viewPager.setAdapter(new ViewPagerAdapter(getApplicationContext(), urlList, null, false));
@@ -158,11 +162,11 @@ public class StartEatspressionActivity extends AppCompatActivity {
         final Runnable Update = new Runnable() {
             @Override
             public void run() {
-                if(currentPage == urlList.size()) {
+                if(currentPage == urlList.size() + 3) {
                     currentPage = 0;
                 }
                 viewPager.setCurrentItem(currentPage++, true);
-                synchronized(surfaceView.dataList) {
+                synchronized (surfaceView.dataList) {
                     surfaceView.dataList.set(0, currentPage - 1);
                 }
             }
@@ -173,9 +177,9 @@ public class StartEatspressionActivity extends AppCompatActivity {
             int cnt = 0;
             @Override
             public void run() {
-                if (cnt < urlList.size())
+                if (cnt < urlList.size() + 3)
                     handler.post(Update);
-                else if (cnt == urlList.size()) {
+                else if (cnt == urlList.size() + 3) {
                     // 페이지 종료
                     surfaceView.surfaceDestroyed(surfaceView.getHolder());
 
@@ -194,7 +198,7 @@ public class StartEatspressionActivity extends AppCompatActivity {
                 }
                 cnt++;
             }
-        }, 100, 2020);
+        }, 0, 2020);
 
 
         Button button2 = findViewById(R.id.stopButtonAuto);

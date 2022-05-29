@@ -58,8 +58,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="포탈 평점을 기준으로 정렬하여 선정됩니다."
-        android:textSize="10sp"
-        android:textStyle="bold" />
+        android:textSize="12sp"
+        android:fontFamily="@font/font"/>
 
     <Button
         android:id="@+id/startButton"
@@ -68,9 +68,10 @@
         android:layout_gravity="center"
         android:layout_marginTop="35dp"
         android:background="@drawable/button_background"
+        android:textStyle="bold"
         android:text="시작하기"
         android:textSize="20sp"
-        android:textStyle="bold" />
+        android:fontFamily="@font/font"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -94,7 +95,8 @@
             android:textStyle="bold"
             android:layout_weight="1"
             android:layout_margin="0dp"
-            android:paddingTop="5dp"/>
+            android:paddingTop="5dp"
+            android:fontFamily="@font/font"/>
         <Button
             android:id="@+id/mainButton"
             android:layout_width="0dp"
@@ -106,7 +108,8 @@
             android:textStyle="bold"
             android:layout_weight="1"
             android:layout_margin="0dp"
-            android:paddingTop="5dp"/>
+            android:paddingTop="5dp"
+            android:fontFamily="@font/font"/>
 
         <Button
             android:id="@+id/customButton"
@@ -118,7 +121,8 @@
             android:textSize="8sp"
             android:text="Custom"
             android:textStyle="bold"
-            android:paddingTop="5dp"/>
+            android:paddingTop="5dp"
+            android:fontFamily="@font/font"/>
 
         <Button
             android:id="@+id/infoButton"
@@ -131,6 +135,7 @@
             android:text="Manual"
             android:textStyle="bold"
             android:paddingTop="5dp"
+            android:fontFamily="@font/font"
             />
     </LinearLayout>
 

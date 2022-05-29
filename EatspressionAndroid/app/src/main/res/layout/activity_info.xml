@@ -30,9 +30,10 @@
                 android:text="Eatspression"
                 android:enabled="false"
                 android:textColor="#000000"
-                android:textSize="33sp"
+                android:textSize="35sp"
                 android:textStyle="bold"
-                android:layout_marginHorizontal="10dp"/>
+                android:layout_marginHorizontal="10dp"
+                android:fontFamily="@font/font"/>
 
             <EditText
                 android:id="@+id/manualText1"
@@ -46,7 +47,8 @@
                 android:inputType="textMultiLine"
                 android:text="Eatspression은 메뉴 선정에 고민이 많은 현대인들을 위한 얼굴 감정 분석 기반 음식 추천 서비스입니다.\n"
                 android:textColor="#000000"
-                android:layout_marginHorizontal="10dp"/>
+                android:layout_marginHorizontal="10dp"
+                android:fontFamily="@font/font"/>
 
             <EditText
                 android:id="@+id/manualText2"
@@ -59,7 +61,8 @@
                 android:inputType="textMultiLine"
                 android:text="위치 기반 서비스를 이용하여 주변 추천 음식점들의 사진들을 가져와 사용자에게 보여주어, 각 음식점들의 음식 사진을 본 사용자의 얼굴 표정 변화를 분석 후, 사용자 맞춤 메뉴를 제공 합니다.\n"
                 android:textColor="#000000"
-                android:layout_marginHorizontal="10dp"/>
+                android:layout_marginHorizontal="10dp"
+                android:fontFamily="@font/font"/>
 
             <EditText
                 android:id="@+id/manualText3"
@@ -72,7 +75,8 @@
                 android:inputType="textMultiLine"
                 android:text="이처럼 Eatspression은 식사 메뉴를 선정할 때 주변 맛집 음식점들을 가져와 자발적으로 해당 음식점의 음식을 본 사용자의 감정 변화를 분석해 음식을 추천해주기에 음식 선정 고민에 대한 사용자의 스트레스 부담을 줄여주는 서비스를 목표로 하고 있습니다. \n"
                 android:textColor="#000000"
-                android:layout_marginHorizontal="10dp"/>
+                android:layout_marginHorizontal="10dp"
+                android:fontFamily="@font/font"/>
 
             <EditText
                 android:id="@+id/manualText4"
@@ -85,7 +89,8 @@
                 android:inputType="textMultiLine"
                 android:text="이러한 목적을 위해서는 사용자의 위치 정보와 카메라 권한이 필요합니다.\n"
                 android:textColor="#000000"
-                android:layout_marginHorizontal="10dp"/>
+                android:layout_marginHorizontal="10dp"
+                android:fontFamily="@font/font"/>
 
             <EditText
                 android:id="@+id/manualText5"
@@ -98,7 +103,8 @@
                 android:inputType="textMultiLine"
                 android:text="간략화된 알고리즘 순서도는 아래와 같습니다."
                 android:textColor="#000000"
-                android:layout_marginHorizontal="10dp"/>
+                android:layout_marginHorizontal="10dp"
+                android:fontFamily="@font/font"/>
 
 
             <ImageView
@@ -118,7 +124,8 @@
                 android:text="개발자 연락처: bestech49@inha.edu \n(오류 사항 및 개선 사항 환영합니다.)"
                 android:textColor="#000000"
                 android:layout_marginHorizontal="10dp"
-                android:layout_marginBottom="40dp"/>
+                android:layout_marginBottom="40dp"
+                android:fontFamily="@font/font"/>
         </LinearLayout>
 
     </ScrollView>

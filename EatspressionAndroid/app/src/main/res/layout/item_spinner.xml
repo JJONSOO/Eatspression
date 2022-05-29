@@ -5,7 +5,9 @@
     android:layout_height="match_parent"
     android:paddingStart="15dp"
     android:paddingEnd="0dp"
-    android:textColor="@android:color/black"
+
     android:textSize="17sp"
     android:gravity="center"
-    android:textStyle="bold"/>
+    android:textStyle="bold"
+    android:fontFamily="@font/font"
+    android:text="312"/>

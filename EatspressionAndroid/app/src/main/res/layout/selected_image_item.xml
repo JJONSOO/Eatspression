@@ -14,6 +14,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:scaleType="fitCenter"
+        android:scaleType="centerCrop"
         android:layout_marginHorizontal="5dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

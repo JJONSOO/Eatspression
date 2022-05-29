@@ -31,9 +31,10 @@
         android:layout_gravity="center"
         android:layout_marginBottom="32dp"
         android:background="@drawable/button_background"
+        android:textStyle="bold"
         android:text="EatsPression!"
         android:textSize="16.5sp"
-        android:textStyle="bold" />
+        android:fontFamily="@font/font"/>
 
     <Button
         android:id="@+id/customButton"
@@ -41,9 +42,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@drawable/button_background"
+        android:textStyle="bold"
         android:text="앨범에서 찾아보자!"
         android:textSize="16.5sp"
-        android:textStyle="bold"
+        android:fontFamily="@font/font"
         />
 
     <LinearLayout
@@ -57,6 +59,7 @@
         android:layout_margin="5dp"
         android:background="@android:drawable/ic_dialog_info"
         android:backgroundTint="#5A4040"
+        android:textStyle="bold"
         android:layout_gravity="right"/>
 
 
