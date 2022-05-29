@@ -151,7 +151,7 @@ def analyze(img_list):
 # def analyze(img_list):
 #     emo_list, vec_list = get_emo_vec(img_list)
     
-#     init_emo = emo_list[0][0]
+#     init_emo = calc_emoSim(emo_list[0][0])
 #     init_vec = vec_list[0][0]
     
 #     del emo_list[0]
