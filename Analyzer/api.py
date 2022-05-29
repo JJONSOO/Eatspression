@@ -138,7 +138,7 @@ def analyze(img_list):
         for emo, vec in zip(l[0], l[1]):
             emo_sim = calc_emoSim(emo)
             cos_sim = calc_cosSim(init_vec, vec)
-            if abs(abs(init_emo) - abs(emo)) > 40:
+            if abs(abs(init_emo) - abs(emo_sim)) > 40:
                 continue
             if emo_idx == -1 or emo_score <= emo_sim:
                 if cos_idx == -1 or cos_score < cos_sim:
