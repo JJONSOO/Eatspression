@@ -10,4 +10,4 @@
     android:gravity="center"
     android:textStyle="bold"
     android:fontFamily="@font/font"
-    android:text="312"/>
+    />

@@ -23,23 +23,16 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/manualText"
+            <ImageView
+                android:id="@+id/mainTextImage"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Eatspression"
-                android:enabled="false"
-                android:textColor="#000000"
-                android:textSize="35sp"
-                android:textStyle="bold"
-                android:layout_marginHorizontal="10dp"
-                android:fontFamily="@font/font"/>
+                android:layout_height="100dp"
+                android:src="@drawable/logo_text" />
 
             <EditText
                 android:id="@+id/manualText1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:background="@android:color/transparent"
                 android:ems="10"
                 android:enabled="false"

@@ -48,7 +48,7 @@ public class StartCustomActivity extends AppCompatActivity {
                 public void run() {
                     while (true) {
                         try {
-                            String page = "http://54.241.56.66:8080/restraunt/custom";
+                            String page = "http://13.52.242.111:8080/restraunt/custom";
 
                             // URL 객체 생성
                             URL url = new URL(page);

@@ -172,9 +172,9 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
                                 try {
                                     String page;
                                     if (customFlag) {
-                                        page = "http://54.241.56.66:8080/restraunt/custom/image";
+                                        page = "http://13.52.242.111:8080/restraunt/custom/image";
                                     } else {
-                                        page = "http://54.241.56.66:8080/restraunt/image";
+                                        page = "http://13.52.242.111:8080/restraunt/image";
                                     }
 
                                     // URL 객체 생성
