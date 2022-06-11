@@ -39,7 +39,7 @@ class User_location(Resource):
         y=point['y']
         distance=point['dist']
         num=point['recommendNum']
-
+        # print('success')
         #Restaurant_Info 받아오기
         Restaurant_Info=Restaurant.get_food_list(x,y,distance,num)
         Restaurant_Info=dict(zip(range(1, len(Restaurant_Info) + 1), Restaurant_Info))
@@ -48,10 +48,27 @@ class User_location(Resource):
         for i in range(len(Restaurant_Info)):
             list=[]
             User_Info[str(User_ID)].append(list)
+        # print('User_Info: ',User_Info)
         Restaurant_Info['user_id']=User_ID
         lock.release()
         return Restaurant_Info
 
+
+@user_api.route("/first")
+class Fisrt(Resource):
+    def get(self):
+        return "get"
+    def post(self):
+        lock.acquire()
+        img_data=request.json
+        image=img_data['image']
+        img_num=int(img_data['img_num'])
+        cur_user_id=img_data['user_id']
+        # print('user_id: ',cur_user_id,'img_num: ',1)
+        # print(type(User_Info[str(cur_user_id)][1]))
+        User_Info[str(cur_user_id)][1].append(image)
+        lock.release()
+        return "김유민 바보"
 
 @user_api.route("/image")
 class User_Face(Resource):
@@ -79,18 +96,16 @@ class Finish(Resource):
 
 
         user_id=request.json['user_id']
-        URL='http://b9be-34-66-47-127.ngrok.io/receive'
-        
-
+        URL='http://597e-104-199-122-49.ngrok.io/receive'
         json_data={'face_info':User_Info[str(user_id)][1:]}
         idx=requests.post(URL,json=json_data)
 
         idx=idx.json()['idx']
         idx=int(idx)+1
-        address=Restaurant.get_food_link(User_Info[str(user_id)][0][idx])
+        # idx=1
 
         #음식 사진 , 이름 , 주소
-        json={'img':User_Info[str(user_id)][0][idx] , 'address':address}
+        json={'img':User_Info[str(user_id)][0][idx][0] , 'address':User_Info[str(user_id)][0][idx][1],'name':User_Info[str(user_id)][0][idx][2]}
         lock.release()
 
         return json
@@ -134,7 +149,7 @@ class Finish(Resource):
         lock.acquire()
 
         user_id=request.json['user_id']
-        URL='http://b9be-34-66-47-127.ngrok.io/receive'
+        URL='http://597e-104-199-122-49.ngrok.io/receive'
         
 
         json_data={'face_info':User_Info[str(user_id)]}
