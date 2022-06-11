@@ -6,7 +6,7 @@ from emotion import *
 model, dense = loadModel()
 
 def analyze(img_list):
-    emo_list, vec_list = get_emo_vec(img_list)
+    emo_list, vec_list = get_emo_vec(img_list, model, dense)
     
     init_emo = calc_emoSim(emo_list[0][0][0])
     init_vec = vec_list[0][0]
