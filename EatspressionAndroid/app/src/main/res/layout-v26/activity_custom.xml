@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#66C0FFFF"
+    android:orientation="vertical"
+    tools:context=".CustomActivity">
+
+    <!-- 추가된 아이템 슬라이드 쇼 만들기! -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_weight="2">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/selectedImages"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:visibility="invisible"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="15dp"/>
+
+        <ImageView
+            android:id="@+id/defaultImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="5dp"
+            android:background="#66C0FFFF"
+            android:scaleType="fitCenter"
+            android:src="@drawable/null_image"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="invisible"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="15dp"
+            />
+
+    </FrameLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="#66C0FFFF"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/selectImageButton"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="35dp"
+            android:background="@drawable/button_background"
+            android:text="앨범에서 고르기"
+            android:textSize="16.5sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/font"/>
+
+        <Button
+            android:id="@+id/startCustomButton"
+            android:layout_width="190dp"
+            android:layout_height="75dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="35dp"
+            android:background="@drawable/button_background"
+            android:text="시작하기"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/font"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <LinearLayout
+        android:id="@+id/nav_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/tab_background"
+        >
+        <Button
+            android:id="@+id/homeButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/tab_button_background"
+            android:text="Home"
+            android:drawableTop="@drawable/ic_home_black_24dp"
+            android:textSize="8sp"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:layout_margin="0dp"
+            android:paddingTop="5dp"/>
+        <Button
+            android:id="@+id/mainButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/tab_button_background"
+            android:drawableTop="@drawable/eatspression_ic_resize"
+            android:text="EatsPression"
+            android:textSize="8sp"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:layout_margin="0dp"
+            android:paddingTop="5dp"/>
+
+        <Button
+            android:id="@+id/customButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selected_tap_button"
+            android:drawableTop="@drawable/eatspression_custom_ic_resize"
+            android:layout_weight="1"
+            android:textSize="8sp"
+            android:text="Custom"
+            android:textStyle="bold"
+            android:paddingTop="5dp"/>
+
+        <Button
+            android:id="@+id/infoButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/tab_button_background"
+            android:drawableTop="@drawable/info_ic_resize"
+            android:layout_weight="1"
+            android:textSize="8sp"
+            android:text="Manual"
+            android:textStyle="bold"
+            android:paddingTop="5dp"
+            />
+    </LinearLayout>
+</LinearLayout>

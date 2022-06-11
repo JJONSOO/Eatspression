@@ -26,11 +26,12 @@
         android:background="@drawable/button_background"
         android:paddingHorizontal="20dp"
         android:text="멈추고 나가기"
-        android:textSize="15sp"
+        android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily="@font/font"/>
 
     <FrameLayout
         android:layout_width="180dp"

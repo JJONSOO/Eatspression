@@ -48,7 +48,7 @@ public class StartCustomActivity extends AppCompatActivity {
                 public void run() {
                     while (true) {
                         try {
-                            String page = "http://54.241.56.66:8080/restraunt/custom";
+                            String page = "http://13.52.242.111:8080/restraunt/custom";
 
                             // URL 객체 생성
                             URL url = new URL(page);
@@ -125,8 +125,8 @@ public class StartCustomActivity extends AppCompatActivity {
         surfaceView = findViewById(R.id.surfaceView);
         surfaceView.customFlag = true;
         synchronized(surfaceView.dataList) {
-            surfaceView.dataList.add(0);
             surfaceView.dataList.add(idList.get(0));
+            surfaceView.dataList.add(0);
         }
 
 
@@ -139,8 +139,8 @@ public class StartCustomActivity extends AppCompatActivity {
         });
         viewPager.setClipToPadding(false);
 
-        viewPager.setPadding(100, 0, 100, 0);
-        viewPager.setPageMargin(50);
+        viewPager.setPadding(50, 0, 50, 0);
+        viewPager.setPageMargin(20);
 
 
         viewPager.setAdapter(new ViewPagerAdapter(getApplicationContext(), null, uriList, true));

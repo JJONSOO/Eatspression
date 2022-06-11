@@ -114,7 +114,7 @@ public class CustomActivity extends AppCompatActivity {
 
         viewPager.setClipToPadding(false);
 
-        viewPager.setPadding(100, 0, 100, 0);
+        viewPager.setPadding(50, 0, 50, 0);
         viewPager.setPageMargin(50);
 
 

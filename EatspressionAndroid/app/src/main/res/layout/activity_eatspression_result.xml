@@ -18,14 +18,14 @@
             android:layout_marginBottom="30dp"
             android:layout_marginTop="15dp"
             android:visibility="invisible"/>
-<!--        <ProgressBar-->
-<!--            android:id="@+id/progressBar"-->
-<!--            style="?android:attr/progressBarStyle"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="60dp"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:visibility="visible"/>-->
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:layout_gravity="center"
+            android:visibility="visible"/>
     </FrameLayout>
 
     <EditText
@@ -36,9 +36,11 @@
         android:enabled="false"
         android:textSize="20sp"
         android:textColor="#FF000000"
-        android:textStyle="bold"
         android:gravity="center"
-        android:layout_gravity="center_horizontal"/>
+        android:textStyle="bold"
+        android:layout_marginTop="70dp"
+        android:layout_gravity="center_horizontal"
+        android:fontFamily="@font/font"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -48,22 +50,29 @@
         >
         <Button
             android:id="@+id/siteButton"
-            android:layout_width="130dp"
-            android:layout_height="65dp"
+            android:layout_width="150dp"
+            android:layout_height="70dp"
             android:background="@drawable/button_background"
             android:text="음식점 정보\n(네이버)"
-            android:textStyle="bold" />
-<!--            android:layout_marginRight="40dp"-->
-<!--            />-->
-<!--        <Button-->
-<!--            android:id="@+id/roadButton"-->
-<!--            android:layout_width="130dp"-->
-<!--            android:layout_height="55dp"-->
-<!--            android:background="@drawable/button_background"-->
-<!--            android:text="음식점 길 찾기"-->
-<!--            android:textStyle="bold"-->
-<!--            />-->
-
+            android:textSize="16.5sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/font"/>
+        <View
+            android:layout_width="30dp"
+            android:layout_height="0dp"/>
+        <Button
+            android:id="@+id/toMain"
+            android:layout_width="150dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/button_background"
+            android:textStyle="bold"
+            android:textSize="16.5sp"
+            android:fontFamily="@font/font"
+            android:text="메인으로 돌아가기"
+            />
     </LinearLayout>
+
 
 </LinearLayout>
