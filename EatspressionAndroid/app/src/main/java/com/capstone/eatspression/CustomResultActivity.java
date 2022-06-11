@@ -57,7 +57,7 @@ public class CustomResultActivity extends AppCompatActivity {
                         public void run() {
                             while (true) {
                                 try {
-                                    String page = "http://13.52.242.111:8080/restraunt/custom/finish";
+                                    String page = "http://18.144.29.108:8080/restraunt/custom/finish";
 
                                     // URL 객체 생성
                                     URL url = new URL(page);

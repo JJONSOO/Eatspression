@@ -48,7 +48,7 @@ public class StartCustomActivity extends AppCompatActivity {
                 public void run() {
                     while (true) {
                         try {
-                            String page = "http://13.52.242.111:8080/restraunt/custom";
+                            String page = "http://18.144.29.108:8080/restraunt/custom";
 
                             // URL 객체 생성
                             URL url = new URL(page);
@@ -148,7 +148,7 @@ public class StartCustomActivity extends AppCompatActivity {
         final Runnable Update = new Runnable() {
             @Override
             public void run() {
-                if(currentPage == uriList.size()) {
+                if(currentPage == uriList.size() + 3) {
                     currentPage = 0;
                 }
                 viewPager.setCurrentItem(currentPage++, true);
@@ -165,9 +165,9 @@ public class StartCustomActivity extends AppCompatActivity {
             int cnt = 0;
             @Override
             public void run() {
-                if (cnt < uriList.size())
+                if (cnt < uriList.size() + 3)
                     handler.post(Update);
-                else if (cnt == uriList.size()) {
+                else if (cnt == uriList.size() + 3) {
                     surfaceView.surfaceDestroyed(surfaceView.getHolder());
                     Intent intent = new Intent();
                     ComponentName componentName = new ComponentName(getApplicationContext(),

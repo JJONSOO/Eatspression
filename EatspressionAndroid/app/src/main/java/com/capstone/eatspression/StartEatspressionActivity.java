@@ -54,7 +54,7 @@ public class StartEatspressionActivity extends AppCompatActivity {
                 public void run() {
                     while (true) {
                         try {
-                            String page = "http://13.52.242.111:8080/restraunt/";
+                            String page = "http://18.144.29.108:8080/restraunt/";
 
                             // URL 객체 생성
                             URL url = new URL(page);
@@ -95,7 +95,7 @@ public class StartEatspressionActivity extends AppCompatActivity {
                                             new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8))) {
                                         String responseLine = null;
                                         while ((responseLine = br.readLine()) != null) {
-                                            sb.append(responseLine.trim());
+                                            sb.append(responseLine.trim().replace("\'", ""));
                                         }
                                     }
 

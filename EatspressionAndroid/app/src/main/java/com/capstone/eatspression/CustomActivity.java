@@ -22,6 +22,7 @@ public class CustomActivity extends AppCompatActivity {
 //    RecyclerView recyclerView;
     ViewPager viewPager;
     ArrayList<Uri> uriList = new ArrayList<>();
+    ViewPagerAdapter pagerAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +32,7 @@ public class CustomActivity extends AppCompatActivity {
         Button selectButton = findViewById(R.id.selectImageButton);
         selectButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {        // 현재는 갤러리 어플을 이용해서 선택 중... 나중에 DC 어플처럼 이쁜 UI로 바꾸자
+            public void onClick(View view) {        // 현재는 갤러리 어플을 이용해서 선택 중... 나중에 이쁜 UI로 바꾸자
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
                 intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
@@ -106,10 +107,8 @@ public class CustomActivity extends AppCompatActivity {
         // navigation bar end
 
 
+
 //        recyclerView = findViewById(R.id.selectedImages);
-
-
-
         viewPager = findViewById(R.id.viewPager);
 
         viewPager.setClipToPadding(false);
@@ -137,13 +136,14 @@ public class CustomActivity extends AppCompatActivity {
 //                    recyclerView.setAdapter(adapter);
 //                    recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
 
-                    viewPager.setAdapter(new ViewPagerAdapter(this, null, uriList, true));
+                    pagerAdapter = new ViewPagerAdapter(this, null, uriList, true, false);
+                    viewPager.setAdapter(pagerAdapter);
                 }
                 else{                               // 이미지를 여러장 선택한 경우
                     ClipData clipData = data.getClipData();
 
-                    if(clipData.getItemCount() > 30){
-                        Toast.makeText(getApplicationContext(), "사진은 30장까지 선택 가능합니다.", Toast.LENGTH_LONG).show();
+                    if(clipData.getItemCount() > 10){
+                        Toast.makeText(getApplicationContext(), "사진은 10장까지 선택 가능합니다.", Toast.LENGTH_LONG).show();
                     }
                     else{
                         uriList.clear();
@@ -159,8 +159,8 @@ public class CustomActivity extends AppCompatActivity {
                         MultiImageAdapter adapter = new MultiImageAdapter(uriList, getApplicationContext());
 //                        recyclerView.setAdapter(adapter);
 //                        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-
-                        viewPager.setAdapter(new ViewPagerAdapter(this, null, uriList, true));
+                        pagerAdapter = new ViewPagerAdapter(this, null, uriList, true, false);
+                        viewPager.setAdapter(pagerAdapter);
                     }
                 }
                 ImageView defaultImage = findViewById(R.id.defaultImage);

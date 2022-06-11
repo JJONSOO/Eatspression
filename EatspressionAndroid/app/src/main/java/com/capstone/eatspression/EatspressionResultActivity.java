@@ -51,7 +51,7 @@ public class EatspressionResultActivity extends AppCompatActivity {
                         public void run() {
                             while (true) {
                                 try {
-                                    String page = "http://13.52.242.111:8080/restraunt/finish";
+                                    String page = "http://18.144.29.108:8080/restraunt/finish";
 
                                     // URL 객체 생성
                                     URL url = new URL(page);
