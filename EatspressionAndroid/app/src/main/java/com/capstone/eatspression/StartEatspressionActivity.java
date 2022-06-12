@@ -35,6 +35,7 @@ public class StartEatspressionActivity extends AppCompatActivity {
     public CameraSurfaceView surfaceView;
     private Timer timer;
     public HttpURLConnection conn;
+    private String serverIp = "52.53.166.243";
 
     public ArrayList<String> urlList = new ArrayList<>();
     public ArrayList<Integer> idList = new ArrayList<>();
@@ -54,7 +55,7 @@ public class StartEatspressionActivity extends AppCompatActivity {
                 public void run() {
                     while (true) {
                         try {
-                            String page = "http://18.144.29.108:8080/restraunt/";
+                            String page = "http://" + serverIp + ":8080/restraunt/";
 
                             // URL 객체 생성
                             URL url = new URL(page);
@@ -154,8 +155,8 @@ public class StartEatspressionActivity extends AppCompatActivity {
         });
         viewPager.setClipToPadding(false);
 
-        viewPager.setPadding(50, 0, 50, 0);
-        viewPager.setPageMargin(20);
+        viewPager.setPadding(5, 0, 5, 0);
+        viewPager.setPageMargin(5);
 
         viewPager.setAdapter(new ViewPagerAdapter(getApplicationContext(), urlList, null, false));
         final Handler handler = new Handler();
@@ -181,6 +182,7 @@ public class StartEatspressionActivity extends AppCompatActivity {
                     handler.post(Update);
                 else if (cnt == urlList.size() + 3) {
                     // 페이지 종료
+                    conn.disconnect();
                     surfaceView.surfaceDestroyed(surfaceView.getHolder());
 
                     Intent intent = new Intent();

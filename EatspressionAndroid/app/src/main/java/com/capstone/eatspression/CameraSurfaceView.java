@@ -41,6 +41,7 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
     public ArrayList<Integer> dataList = new ArrayList<>();
     int sendCnt = 0;
     int totalImageNum;
+    private String serverIp = "52.53.166.243";
     // image를 보내는 연결된 HttpURLConnection!
     // 보내는 방법은 https://sesang06.tistory.com/19를 참조하자!
 
@@ -172,9 +173,9 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
                                 try {
                                     String page;
                                     if (customFlag) {
-                                        page = "http://18.144.29.108:8080/restraunt/custom/image";
+                                        page = "http://" + serverIp + ":8080/restraunt/custom/image";
                                     } else {
-                                        page = "http://18.144.29.108:8080/restraunt/image";
+                                        page = "http://" + serverIp + ":8080/restraunt/image";
                                     }
 
                                     // URL 객체 생성
@@ -282,9 +283,9 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
                                 try {
                                     String page;
                                     if (customFlag) {
-                                        page = "http://54.241.56.66:8080/restraunt/first";
+                                        page = "http://" + serverIp + ":8080/restraunt/custom/first";
                                     } else {
-                                        page = "http://54.241.56.66:8080/restraunt/first";
+                                        page = "http://" + serverIp + ":8080/restraunt/first";
                                     }
 
                                     // URL 객체 생성

@@ -33,6 +33,7 @@ public class EatspressionResultActivity extends AppCompatActivity {
     int userId;
     Thread th;
     Handler handler;
+    private String serverIp = "52.53.166.243";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +52,7 @@ public class EatspressionResultActivity extends AppCompatActivity {
                         public void run() {
                             while (true) {
                                 try {
-                                    String page = "http://18.144.29.108:8080/restraunt/finish";
+                                    String page = "http://" + serverIp + ":8080/restraunt/finish";
 
                                     // URL 객체 생성
                                     URL url = new URL(page);
