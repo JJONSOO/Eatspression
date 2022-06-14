@@ -33,7 +33,7 @@ public class EatspressionResultActivity extends AppCompatActivity {
     int userId;
     Thread th;
     Handler handler;
-    private String serverIp = "52.53.166.243";
+    private String serverIp = "54.176.103.52";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,10 +96,9 @@ public class EatspressionResultActivity extends AppCompatActivity {
 
                                             // 응답 Json 타입
                                             JSONObject jsonResponse = new JSONObject(sb.toString());
-                                            responseList.add(jsonResponse.getString("img"));
+                                            responseList.add(jsonResponse.getString("img").trim().replace("\'", ""));
                                             responseList.add(jsonResponse.getString("name"));
                                             responseList.add(jsonResponse.getString("address"));
-
                                         } else {
                                             Log.i("tag", "오류가 있는듯...");
                                         }

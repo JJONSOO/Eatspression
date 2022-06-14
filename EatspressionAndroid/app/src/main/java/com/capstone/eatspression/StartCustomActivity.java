@@ -35,7 +35,7 @@ public class StartCustomActivity extends AppCompatActivity {
     CameraSurfaceView surfaceView;
     Timer timer;
     public HttpURLConnection conn;
-    private String serverIp = "52.53.166.243";
+    private String serverIp = "54.176.103.52";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -153,7 +153,7 @@ public class StartCustomActivity extends AppCompatActivity {
                     currentPage = 0;
                 }
                 viewPager.setCurrentItem(currentPage++, true);
-                synchronized(surfaceView.dataList) {
+                synchronized (surfaceView.dataList) {
                     surfaceView.dataList.set(0, currentPage - 1);
                 }
             }
@@ -169,7 +169,10 @@ public class StartCustomActivity extends AppCompatActivity {
                 if (cnt < uriList.size() + 3)
                     handler.post(Update);
                 else if (cnt == uriList.size() + 3) {
+                    conn.disconnect();
                     surfaceView.surfaceDestroyed(surfaceView.getHolder());
+
+
                     Intent intent = new Intent();
                     ComponentName componentName = new ComponentName(getApplicationContext(),
                             CustomResultActivity.class);

@@ -37,7 +37,7 @@ public class CustomResultActivity extends AppCompatActivity {
     EditText resultText;
     Handler handler;
     Thread th;
-    private String serverIp = "52.53.166.243";
+    private String serverIp = "54.176.103.52";
     @Override
     protected void onCreate(Bundle savedInstanceState) {Log.i("tag", "get result!!");
         uriList = getIntent().getExtras().getParcelableArrayList("imgUris");

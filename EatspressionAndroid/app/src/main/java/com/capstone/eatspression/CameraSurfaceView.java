@@ -41,7 +41,7 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
     public ArrayList<Integer> dataList = new ArrayList<>();
     int sendCnt = 0;
     int totalImageNum;
-    private String serverIp = "52.53.166.243";
+    private String serverIp = "54.176.103.52";
     // image를 보내는 연결된 HttpURLConnection!
     // 보내는 방법은 https://sesang06.tistory.com/19를 참조하자!
 
@@ -102,7 +102,7 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
                 boolean sendFirst = false;
                 public void onPreviewFrame(byte[] data, Camera camera2) {
                     synchronized(dataList) {
-                        if (dataList.size() != 2 || dataList.get(0) < 3)
+                        if (dataList.size() != 2 || dataList.get(0) < 2)
                             return;
                     }
 
@@ -361,8 +361,6 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
 
     @Override
     public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
-
-
         //소멸
         try {
             while(true) {

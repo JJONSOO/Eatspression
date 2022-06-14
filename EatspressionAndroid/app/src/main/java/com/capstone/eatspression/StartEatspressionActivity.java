@@ -35,7 +35,7 @@ public class StartEatspressionActivity extends AppCompatActivity {
     public CameraSurfaceView surfaceView;
     private Timer timer;
     public HttpURLConnection conn;
-    private String serverIp = "52.53.166.243";
+    private String serverIp = "54.176.103.52";
 
     public ArrayList<String> urlList = new ArrayList<>();
     public ArrayList<Integer> idList = new ArrayList<>();
