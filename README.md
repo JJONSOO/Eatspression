@@ -7,7 +7,7 @@ EATSPRESSION은 메뉴 선정에 고민 많은 현대인들을 위한 얼굴 감
 ![실행 프로세스 요약도](https://i.ibb.co/JswYBvV/2.png)
 ## 개발 환경 및 통신 프로세스 요약도
 ![통신 프로세스 요약도](https://i.ibb.co/dDxkkhS/1.png)
-## 사용 기술 및 스택
+## 개발 환경 및 사용 오픈 소스
 Front-end : Android Studio(JAVA 1.8) (minSdk 21)<br>
 Back-end : Flask , aws , ngrok<br>
 Artifical-Intelligence : Colab , Deepface<br>
